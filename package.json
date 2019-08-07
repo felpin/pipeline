@@ -12,6 +12,7 @@
   },
   "scripts": {
     "eslint": "eslint --ext .js --ext .jsx src",
+    "lint": "yarn eslint && yarn stylelint",
     "start": "react-scripts start",
     "stylelint": "stylelint './src/**/*.js'",
     "build": "react-scripts build",
