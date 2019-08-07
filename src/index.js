@@ -1,12 +1,37 @@
+/* eslint-disable react/jsx-filename-extension */
+import 'normalize.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const GlobalStyle = createGlobalStyle`
+  body {
+    background-color: #fafafa;
+    font-family: 'Montserrat', sans-serif;
+  }
+`;
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+const theme = {
+  color: {
+    blue: '#0072ce',
+    dark: '#333f48',
+    green: '#18ad18',
+    light: '#979ea2',
+    red: '#f9423a',
+  },
+  fontSize: {
+    medium: '16px',
+    small: '12px',
+  },
+  fontWeight: {
+    bold: 600,
+    regular: 400,
+  },
+};
+
+ReactDOM.render(
+  <ThemeProvider theme={theme}>
+    <GlobalStyle />
+  </ThemeProvider>,
+  document.getElementById('root')
+);
