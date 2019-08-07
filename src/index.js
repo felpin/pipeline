@@ -6,6 +6,7 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   body {
+    background-color: #fafafa;
     font-family: 'Montserrat', sans-serif;
   }
 `;
