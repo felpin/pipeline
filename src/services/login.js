@@ -1,9 +1,9 @@
-import axios from 'axios';
+import { CREDENTIALS_EMAIL, CREDENTIALS_PASSWORD } from '../config/environment';
 
-import { API_URL, CREDENTIALS_EMAIL, CREDENTIALS_PASSWORD } from '../config/environment';
+import axios from './axios-instance';
 
 export default async () => {
-  return axios.post(`${API_URL}/login`, {
+  return axios.post('login', {
     email: CREDENTIALS_EMAIL,
     password: CREDENTIALS_PASSWORD,
   });
