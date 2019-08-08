@@ -4,6 +4,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
+import './i18n';
+
 const GlobalStyle = createGlobalStyle`
   body {
     background-color: #fafafa;
