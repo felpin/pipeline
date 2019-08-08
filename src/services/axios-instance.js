@@ -15,3 +15,7 @@ const request = method => async (...params) => {
 
 export const get = request(instance.get);
 export const post = request(instance.post);
+
+export const setToken = token => {
+  instance.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
