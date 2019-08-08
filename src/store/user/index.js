@@ -1,6 +1,8 @@
 import { setToken } from '../../services/axios-instance';
 import loginService from '../../services/login';
 
+import { tokenSelector } from './selectors';
+
 const LOGIN = 'pipeline/user/LOGIN';
 
 export default (state = {}, action) => {
@@ -15,13 +17,14 @@ export default (state = {}, action) => {
   }
 };
 
-export const login = () => async dispatch => {
+export const login = () => async (dispatch, getState) => {
   const response = await dispatch({
     type: LOGIN,
     payload: loginService(),
   });
 
-  setToken(response.value.data.token);
+  const token = tokenSelector(getState());
+  setToken(token);
 
   return response;
 };
