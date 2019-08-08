@@ -7,6 +7,7 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 import './i18n';
 import store from './store';
+import PipelinePage from './pages/pipeline';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -37,6 +38,7 @@ ReactDOM.render(
   <ThemeProvider theme={theme}>
     <Provider store={store}>
       <GlobalStyle />
+      <PipelinePage />
     </Provider>
   </ThemeProvider>,
   document.getElementById('root')
