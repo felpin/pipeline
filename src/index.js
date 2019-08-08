@@ -2,9 +2,11 @@
 import 'normalize.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 import './i18n';
+import store from './store';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -33,7 +35,9 @@ const theme = {
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
-    <GlobalStyle />
+    <Provider store={store}>
+      <GlobalStyle />
+    </Provider>
   </ThemeProvider>,
   document.getElementById('root')
 );
