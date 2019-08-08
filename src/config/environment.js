@@ -1,0 +1,3 @@
+export const API_URL = process.env.REACT_APP_API_URL;
+export const CREDENTIALS_EMAIL = process.env.REACT_APP_CREDENTIALS_EMAIL;
+export const CREDENTIALS_PASSWORD = process.env.REACT_APP_CREDENTIALS_PASSWORD;
