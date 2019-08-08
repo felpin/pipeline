@@ -5,8 +5,10 @@ const LOGIN = 'pipeline/user/LOGIN';
 
 export default (state = {}, action) => {
   switch (action.type) {
-    case `${LOGIN}_FULFILLED`:
-      return action.payload.data;
+    case `${LOGIN}_FULFILLED`: {
+      const { id, token } = action.payload.data;
+      return { id, token };
+    }
 
     default:
       return state;
