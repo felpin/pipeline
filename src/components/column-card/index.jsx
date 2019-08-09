@@ -42,17 +42,23 @@ const TopRightContainer = styled(Detail)`
   justify-self: end;
 `;
 
+const Value = styled(Detail)`
+  color: ${props => props.theme.color.dark};
+  grid-area: 4 / 1;
+`;
+
 const VerticalEllipsis = styled.span`
   color: ${props => props.theme.color.dark};
   font-size: ${props => props.theme.fontSize.medium};
   font-weight: ${props => props.theme.fontWeight.regular};
 `;
 
-const ColumnCard = ({ client, customInfo, id, manufacter }) => (
+const ColumnCard = ({ client, currency, customInfo, id, manufacter, taxedTotal }) => (
   <Container>
     <Title>{id}</Title>
     <Manufacter>{manufacter}</Manufacter>
     <Client>{client}</Client>
+    {!!currency && <Value>{`${taxedTotal} ${currency}`}</Value>}
     <TopRightContainer>
       {customInfo}
       <VerticalEllipsis>⋮</VerticalEllipsis>
@@ -62,14 +68,18 @@ const ColumnCard = ({ client, customInfo, id, manufacter }) => (
 
 ColumnCard.propTypes = {
   client: PropTypes.string.isRequired,
+  currency: PropTypes.string,
   customInfo: PropTypes.node,
   id: PropTypes.number.isRequired,
   manufacter: PropTypes.string,
+  taxedTotal: PropTypes.number,
 };
 
 ColumnCard.defaultProps = {
+  currency: '',
   customInfo: null,
   manufacter: '-',
+  taxedTotal: 0,
 };
 
 export default React.memo(ColumnCard);
