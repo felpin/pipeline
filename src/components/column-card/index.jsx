@@ -2,6 +2,12 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 
+const STATE = {
+  NORMAL: 'normal',
+  SUCCESS: 'success',
+  ERROR: 'error',
+};
+
 const Detail = styled.div`
   color: ${props => props.theme.color.light};
   font-size: ${props => props.theme.fontSize.small};
@@ -18,6 +24,10 @@ const Manufacter = styled(Detail)`
 
 const TopRightContainer = styled(Detail)`
   align-items: center;
+  color: ${props =>
+    (props.state === STATE.SUCCESS && props.theme.color.green) ||
+    (props.state === STATE.ERROR && props.theme.color.red) ||
+    props.theme.color.light};
   display: flex;
   fill: currentColor;
   grid-area: 1 / 2;
@@ -33,6 +43,11 @@ const Container = styled.div`
   align-items: center;
   background-color: white;
   border: 1px solid #dddee1;
+  border-left-color: ${props =>
+    (props.state === STATE.SUCCESS && props.theme.color.green) ||
+    (props.state === STATE.ERROR && props.theme.color.red) ||
+    '#dddee1'};
+  border-left-width: ${props => (props.state !== STATE.NORMAL ? '3px' : '1px')};
   display: grid;
   grid-gap: 4px;
   grid-template: repeat(3, auto) / 1fr 1fr;
@@ -58,13 +73,22 @@ const VerticalEllipsis = styled.span`
   font-weight: ${props => props.theme.fontWeight.regular};
 `;
 
-const ColumnCard = ({ action, client, currency, customInfo, id, manufacter, taxedTotal }) => (
-  <Container>
+const ColumnCard = ({
+  action,
+  client,
+  currency,
+  customInfo,
+  id,
+  manufacter,
+  state,
+  taxedTotal,
+}) => (
+  <Container state={state}>
     <Title>{id}</Title>
     <Manufacter>{manufacter}</Manufacter>
     <Client>{client}</Client>
     {!!currency && <Value>{`${taxedTotal} ${currency}`}</Value>}
-    <TopRightContainer>
+    <TopRightContainer state={state}>
       {customInfo}
       <VerticalEllipsis>⋮</VerticalEllipsis>
     </TopRightContainer>
@@ -79,6 +103,7 @@ ColumnCard.propTypes = {
   customInfo: PropTypes.node,
   id: PropTypes.number.isRequired,
   manufacter: PropTypes.string,
+  state: PropTypes.oneOf(Object.values(STATE)),
   taxedTotal: PropTypes.number,
 };
 
@@ -87,6 +112,7 @@ ColumnCard.defaultProps = {
   currency: '',
   customInfo: null,
   manufacter: '-',
+  state: STATE.NORMAL,
   taxedTotal: 0,
 };
 
