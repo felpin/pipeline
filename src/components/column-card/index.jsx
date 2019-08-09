@@ -17,6 +17,7 @@ const Manufacter = styled(Detail)`
 `;
 
 const Container = styled.div`
+  align-items: center;
   background-color: white;
   border: 1px solid #dddee1;
   display: grid;
@@ -33,21 +34,41 @@ const Title = styled.div`
   grid-area: 1 / 1;
 `;
 
-const ColumnCard = ({ client, id, manufacter }) => (
+const TopRightContainer = styled(Detail)`
+  align-items: center;
+  display: flex;
+  fill: currentColor;
+  grid-area: 1 / 2;
+  justify-self: end;
+`;
+
+const VerticalEllipsis = styled.span`
+  color: ${props => props.theme.color.dark};
+  font-size: ${props => props.theme.fontSize.medium};
+  font-weight: ${props => props.theme.fontWeight.regular};
+`;
+
+const ColumnCard = ({ client, customInfo, id, manufacter }) => (
   <Container>
     <Title>{id}</Title>
     <Manufacter>{manufacter}</Manufacter>
     <Client>{client}</Client>
+    <TopRightContainer>
+      {customInfo}
+      <VerticalEllipsis>⋮</VerticalEllipsis>
+    </TopRightContainer>
   </Container>
 );
 
 ColumnCard.propTypes = {
   client: PropTypes.string.isRequired,
+  customInfo: PropTypes.node,
   id: PropTypes.number.isRequired,
   manufacter: PropTypes.string,
 };
 
 ColumnCard.defaultProps = {
+  customInfo: null,
   manufacter: '-',
 };
 
