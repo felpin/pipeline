@@ -8,9 +8,7 @@ import Circle from './circle';
 import CircleContainer from './circle-container';
 import Container from './container';
 import Total from './total';
-import TotalCenter from './total-center';
 import TotalContainer from './total-container';
-import TotalEnd from './total-end';
 import Title from './title';
 
 const ColumnHeader = ({ deals, showTotals, taxedTotalEur, taxedTotalGbp, title }) => {
@@ -23,8 +21,8 @@ const ColumnHeader = ({ deals, showTotals, taxedTotalEur, taxedTotalGbp, title }
           <Title>{title}</Title>
           <TotalContainer showTotals={showTotals}>
             <Total>{t('deal', { count: deals })}</Total>
-            {showTotals && <TotalCenter>{`${taxedTotalEur}€`}</TotalCenter>}
-            {showTotals && <TotalEnd>{`${taxedTotalGbp}£`}</TotalEnd>}
+            {showTotals && <Total justifySelf="center">{`${taxedTotalEur}€`}</Total>}
+            {showTotals && <Total justifySelf="end">{`${taxedTotalGbp}£`}</Total>}
           </TotalContainer>
         </Card>
       </CardContainer>
