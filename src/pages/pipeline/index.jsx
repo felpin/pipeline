@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import Header from '../../components/header';
+import QuotePendingColumn from '../../containers/quote-pending-column';
 import { fetch } from '../../store/pipeline';
 
 const PipelinePage = () => {
@@ -11,7 +11,7 @@ const PipelinePage = () => {
     dispatch(fetch());
   }, [dispatch]);
 
-  return <Header />;
+  return <QuotePendingColumn />;
 };
 
 export default React.memo(PipelinePage);
