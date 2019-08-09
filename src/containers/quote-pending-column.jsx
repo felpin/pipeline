@@ -6,10 +6,12 @@ import Column from '../components/column';
 import ColumnCard from '../components/column-card';
 import ColumnHeader from '../components/column-header';
 import { QUOTE_PENDING } from '../contants/pipeline-status';
-import { pipelineGroupedSelector } from '../store/pipeline/selectors';
+import { makePipelineStatusItemsSelector } from '../store/pipeline/selectors';
+
+const quotePendingItemsSelector = makePipelineStatusItemsSelector(QUOTE_PENDING);
 
 const QuotePendingColumn = () => {
-  const quotePendingItems = useSelector(pipelineGroupedSelector)[QUOTE_PENDING];
+  const quotePendingItems = useSelector(quotePendingItemsSelector);
   const { t } = useTranslation();
 
   const header = useMemo(
