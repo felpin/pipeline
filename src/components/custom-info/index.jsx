@@ -18,4 +18,4 @@ CustomInfo.propTypes = {
   Icon: PropTypes.object.isRequired,
 };
 
-export default CustomInfo;
+export default React.memo(CustomInfo);

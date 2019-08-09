@@ -31,4 +31,4 @@ const QuotePendingColumn = () => {
   return <Column header={header} items={quotePendingItems} renderItem={renderItem} />;
 };
 
-export default QuotePendingColumn;
+export default React.memo(QuotePendingColumn);
