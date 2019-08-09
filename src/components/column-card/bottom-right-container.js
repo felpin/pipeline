@@ -4,5 +4,5 @@ import TopRightContainer from './top-right-container';
 
 export default styled(TopRightContainer)`
   color: ${props => props.theme.color.blue};
-  grid-area: 4 / 2;
+  grid-area: ${props => props.row} / 2;
 `;
