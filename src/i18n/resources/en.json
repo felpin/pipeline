@@ -2,6 +2,7 @@
   "translation": {
     "deal": "{{count}} deal",
     "deal_plural": "{{count}} deals",
-    "pipeline": "Pipeline"
+    "pipeline": "Pipeline",
+    "quotePending": "RFQ"
   }
 }
