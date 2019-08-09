@@ -16,6 +16,19 @@ const Manufacter = styled(Detail)`
   grid-area: 2 / 1;
 `;
 
+const TopRightContainer = styled(Detail)`
+  align-items: center;
+  display: flex;
+  fill: currentColor;
+  grid-area: 1 / 2;
+  justify-self: end;
+`;
+
+const BottomRightContainer = styled(TopRightContainer)`
+  color: ${props => props.theme.color.blue};
+  grid-area: 4 / 2;
+`;
+
 const Container = styled.div`
   align-items: center;
   background-color: white;
@@ -34,14 +47,6 @@ const Title = styled.div`
   grid-area: 1 / 1;
 `;
 
-const TopRightContainer = styled(Detail)`
-  align-items: center;
-  display: flex;
-  fill: currentColor;
-  grid-area: 1 / 2;
-  justify-self: end;
-`;
-
 const Value = styled(Detail)`
   color: ${props => props.theme.color.dark};
   grid-area: 4 / 1;
@@ -53,7 +58,7 @@ const VerticalEllipsis = styled.span`
   font-weight: ${props => props.theme.fontWeight.regular};
 `;
 
-const ColumnCard = ({ client, currency, customInfo, id, manufacter, taxedTotal }) => (
+const ColumnCard = ({ action, client, currency, customInfo, id, manufacter, taxedTotal }) => (
   <Container>
     <Title>{id}</Title>
     <Manufacter>{manufacter}</Manufacter>
@@ -63,10 +68,12 @@ const ColumnCard = ({ client, currency, customInfo, id, manufacter, taxedTotal }
       {customInfo}
       <VerticalEllipsis>⋮</VerticalEllipsis>
     </TopRightContainer>
+    <BottomRightContainer>{action}</BottomRightContainer>
   </Container>
 );
 
 ColumnCard.propTypes = {
+  action: PropTypes.node,
   client: PropTypes.string.isRequired,
   currency: PropTypes.string,
   customInfo: PropTypes.node,
@@ -76,6 +83,7 @@ ColumnCard.propTypes = {
 };
 
 ColumnCard.defaultProps = {
+  action: null,
   currency: '',
   customInfo: null,
   manufacter: '-',
