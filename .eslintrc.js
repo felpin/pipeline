@@ -3,7 +3,7 @@ module.exports = {
     browser: true,
     es6: true,
   },
-  extends: ['airbnb', 'plugin:prettier/recommended'],
+  extends: ['react-app', 'airbnb', 'plugin:prettier/recommended'],
   parserOptions: {
     ecmaVersion: 2019,
     sourceType: 'module',
