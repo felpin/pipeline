@@ -9,7 +9,7 @@ const PipelinePage = () => {
 
   useEffect(() => {
     dispatch(fetch());
-  }, []);
+  }, [dispatch]);
 
   return <Header />;
 };
