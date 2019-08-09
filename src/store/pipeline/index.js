@@ -1,3 +1,4 @@
+import humps from 'humps';
 import produce from 'immer';
 
 import pipelineService from '../../services/pipeline';
@@ -19,7 +20,7 @@ export default (state = [], action) =>
 
       case `${FETCH}_FULFILLED`: {
         action.payload.data.forEach(item => {
-          draft.push(item);
+          draft.push(humps.camelizeKeys(item));
         });
         break;
       }
