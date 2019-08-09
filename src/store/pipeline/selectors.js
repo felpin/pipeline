@@ -9,7 +9,7 @@ const initialPipelineGrouped = Object.values({ ...STATUS }).reduce(
   {}
 );
 
-export const pipelineGrouped = createSelector(
+export const pipelineGroupedSelector = createSelector(
   pipelineSelector,
   pipeline =>
     pipeline.reduce(
