@@ -3,6 +3,7 @@
     "deal": "{{count}} deal",
     "deal_plural": "{{count}} deals",
     "pipeline": "Pipeline",
-    "quotePending": "RFQ"
+    "quotePending": "RFQ",
+    "quoteReady": "Quote ready"
   }
 }
