@@ -14,6 +14,5 @@ export default styled.div`
   display: grid;
   grid-gap: 4px;
   grid-template: repeat(3, auto) / 1fr 1fr;
-  margin: 12px 12px 0;
   padding: 12px 8px;
 `;
