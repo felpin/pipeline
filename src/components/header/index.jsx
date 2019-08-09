@@ -1,16 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import styled from 'styled-components';
 
-const Container = styled.div`
-  border-bottom: 1px solid #dddee1;
-  padding: 12px;
-`;
-
-const Title = styled.h1`
-  color: ${props => props.theme.color.dark};
-  font-size: ${props => props.theme.fontSize.medium};
-`;
+import Container from './container';
+import Title from './title';
 
 const Header = () => {
   const { t } = useTranslation();
