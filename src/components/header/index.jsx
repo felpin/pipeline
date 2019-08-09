@@ -1,18 +1,16 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import styled from 'styled-components';
 
-const Title = styled.h1`
-  font-size: ${props => props.theme.fontSize.medium};
-`;
+import Container from './container';
+import Title from './title';
 
 const Header = () => {
   const { t } = useTranslation();
 
   return (
-    <div>
+    <Container>
       <Title>{t('pipeline')}</Title>
-    </div>
+    </Container>
   );
 };
 
