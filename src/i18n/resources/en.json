@@ -3,7 +3,10 @@
     "acceptQuote": "Accept quote",
     "deal": "{{count}} deal",
     "deal_plural": "{{count}} deals",
+    "paymentOverdue": "Payment overdue {{count}} day",
+    "paymentOverdue_plural": "Payment overdue {{count}} days",
     "pipeline": "Pipeline",
+    "quoteAccepted": "Quote accepted",
     "quotePending": "RFQ",
     "quoteReady": "Quote ready",
     "refuseQuote": "Refuse quote"
