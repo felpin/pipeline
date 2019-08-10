@@ -9,9 +9,9 @@ import IconButtonSet from '../components/icon-button-set';
 import Column from '../components/column';
 import ColumnCard from '../components/column-card';
 import ColumnHeader from '../components/column-header';
-import { EUR, GBP } from '../contants/currency';
 import CustomInfo from '../components/custom-info';
 import { QUOTE_ACCEPTED, QUOTE_READY, QUOTE_REFUSED } from '../contants/pipeline-status';
+import useTaxedTotal from '../hooks/use-taxed-total';
 import { changeStatus } from '../store/pipeline';
 import { makePipelineStatusItemsSelector } from '../store/pipeline/selectors';
 
@@ -20,6 +20,7 @@ const quoteReadyItemsSelector = makePipelineStatusItemsSelector(QUOTE_READY);
 const QuoteReadyColumn = () => {
   const dispatch = useDispatch();
   const quoteReadyItems = useSelector(quoteReadyItemsSelector);
+  const { taxedTotalEur, taxedTotalGbp } = useTaxedTotal(quoteReadyItems);
   const { t } = useTranslation();
 
   const createActionItemData = useCallback(
@@ -39,17 +40,6 @@ const QuoteReadyColumn = () => {
     },
     [dispatch, t]
   );
-
-  const getTaxedTotal = useCallback(
-    currency =>
-      quoteReadyItems
-        .filter(item => item.currency === currency)
-        .reduce((total, item) => total + item.taxedTotal, 0),
-    [quoteReadyItems]
-  );
-
-  const taxedTotalEur = useMemo(() => getTaxedTotal(EUR), [getTaxedTotal]);
-  const taxedTotalGbp = useMemo(() => getTaxedTotal(GBP), [getTaxedTotal]);
 
   const header = useMemo(
     () => (
