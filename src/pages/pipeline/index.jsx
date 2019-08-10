@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import QuoteAcceptedColumn from '../../containers/quote-accepted-column';
 import QuotePendingColumn from '../../containers/quote-pending-column';
 import QuoteReadyColumn from '../../containers/quote-ready-column';
+import ReadyForProductionColumn from '../../containers/ready-for-production-column';
 import { fetch } from '../../store/pipeline';
 
 const PipelinePage = () => {
@@ -18,6 +19,7 @@ const PipelinePage = () => {
       <QuotePendingColumn />
       <QuoteReadyColumn />
       <QuoteAcceptedColumn />
+      <ReadyForProductionColumn />
     </>
   );
 };

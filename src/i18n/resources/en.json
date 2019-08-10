@@ -9,6 +9,8 @@
     "quoteAccepted": "Quote accepted",
     "quotePending": "RFQ",
     "quoteReady": "Quote ready",
-    "refuseQuote": "Refuse quote"
+    "readyForProduction": "Available for production",
+    "refuseQuote": "Refuse quote",
+    "startProduction": "Start production"
   }
 }
