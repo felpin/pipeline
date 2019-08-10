@@ -11,8 +11,8 @@ export default pipeline => {
     [pipeline]
   );
 
-  const taxedTotalEur = useMemo(() => getTaxedTotal(EUR), [getTaxedTotal]);
-  const taxedTotalGbp = useMemo(() => getTaxedTotal(GBP), [getTaxedTotal]);
+  const taxedTotalEur = useMemo(() => Math.round(getTaxedTotal(EUR)), [getTaxedTotal]);
+  const taxedTotalGbp = useMemo(() => Math.round(getTaxedTotal(GBP)), [getTaxedTotal]);
 
   return { taxedTotalEur, taxedTotalGbp };
 };
