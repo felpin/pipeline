@@ -1,9 +1,11 @@
 {
   "translation": {
+    "acceptQuote": "Accept quote",
     "deal": "{{count}} deal",
     "deal_plural": "{{count}} deals",
     "pipeline": "Pipeline",
     "quotePending": "RFQ",
-    "quoteReady": "Quote ready"
+    "quoteReady": "Quote ready",
+    "refuseQuote": "Refuse quote"
   }
 }
