@@ -6,7 +6,7 @@ import BottomRightContainer from './bottom-right-container';
 import Client from './client';
 import Container from './container';
 import Declined from './declined';
-import Manufacter from './manufacter';
+import Manufacturer from './manufacturer';
 import * as STATE from './state';
 import Title from './title';
 import TopRightContainer from './top-right-container';
@@ -25,7 +25,7 @@ const ColumnCard = ({
   customInfo,
   declined,
   id,
-  manufacter,
+  manufacturer,
   state,
   taxedTotal,
   warning,
@@ -37,7 +37,7 @@ const ColumnCard = ({
   return (
     <Container state={state}>
       <Title>{id}</Title>
-      <Manufacter>{manufacter}</Manufacter>
+      <Manufacturer>{manufacturer}</Manufacturer>
       <Client>{client}</Client>
       {!!currency && <Value>{`${taxedTotal} ${currency}`}</Value>}
       <TopRightContainer state={state}>
@@ -60,20 +60,20 @@ const ColumnCard = ({
   );
 };
 
-const manufacterPropType = PropTypes.shape({
+const manufacturerPropType = PropTypes.shape({
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
 });
 
 ColumnCard.propTypes = {
   action: PropTypes.node,
-  available: PropTypes.arrayOf(manufacterPropType),
+  available: PropTypes.arrayOf(manufacturerPropType),
   client: PropTypes.string.isRequired,
   currency: PropTypes.string,
   customInfo: PropTypes.node,
-  declined: PropTypes.arrayOf(manufacterPropType),
+  declined: PropTypes.arrayOf(manufacturerPropType),
   id: PropTypes.number.isRequired,
-  manufacter: PropTypes.string,
+  manufacturer: PropTypes.string,
   state: PropTypes.oneOf(Object.values(STATE)),
   taxedTotal: PropTypes.number,
   warning: PropTypes.string,
@@ -85,7 +85,7 @@ ColumnCard.defaultProps = {
   currency: '',
   customInfo: null,
   declined: [],
-  manufacter: '-',
+  manufacturer: '-',
   state: STATE.NORMAL,
   taxedTotal: 0,
   warning: '',
