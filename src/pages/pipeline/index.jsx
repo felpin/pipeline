@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
+import InProductionColumn from '../../containers/in-production-column';
 import QuoteAcceptedColumn from '../../containers/quote-accepted-column';
 import QuotePendingColumn from '../../containers/quote-pending-column';
 import QuoteReadyColumn from '../../containers/quote-ready-column';
@@ -20,6 +21,7 @@ const PipelinePage = () => {
       <QuoteReadyColumn />
       <QuoteAcceptedColumn />
       <ReadyForProductionColumn />
+      <InProductionColumn />
     </>
   );
 };

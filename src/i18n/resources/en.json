@@ -3,6 +3,7 @@
     "acceptQuote": "Accept quote",
     "deal": "{{count}} deal",
     "deal_plural": "{{count}} deals",
+    "inProduction": "In production",
     "paymentOverdue": "Payment overdue {{count}} day",
     "paymentOverdue_plural": "Payment overdue {{count}} days",
     "pipeline": "Pipeline",
@@ -11,6 +12,9 @@
     "quoteReady": "Quote ready",
     "readyForProduction": "Available for production",
     "refuseQuote": "Refuse quote",
+    "shipItem": "Ship item",
+    "shippingLate": "Should have shipped {{count}} day ago",
+    "shippingLate_plural": "Should have shipped {{count}} days ago",
     "startProduction": "Start production"
   }
 }
