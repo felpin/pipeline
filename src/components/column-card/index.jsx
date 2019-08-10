@@ -12,6 +12,7 @@ import Title from './title';
 import TopRightContainer from './top-right-container';
 import Value from './value';
 import VerticalEllipsis from './vertical-ellipsis';
+import Warning from './warning';
 
 const ACTION_MIN_ROW = 4;
 const AVAILABLE_STARTING_ROW = 2;
@@ -27,9 +28,11 @@ const ColumnCard = ({
   manufacter,
   state,
   taxedTotal,
+  warning,
 }) => {
   const declinedStartingRow = AVAILABLE_STARTING_ROW + available.length;
   const actionRow = Math.max(ACTION_MIN_ROW, declinedStartingRow + declined.length);
+  const warningRow = actionRow + 1;
 
   return (
     <Container state={state}>
@@ -52,6 +55,7 @@ const ColumnCard = ({
         </Declined>
       ))}
       <BottomRightContainer row={actionRow}>{action}</BottomRightContainer>
+      {warning && <Warning row={warningRow}>{warning}</Warning>}
     </Container>
   );
 };
@@ -72,6 +76,7 @@ ColumnCard.propTypes = {
   manufacter: PropTypes.string,
   state: PropTypes.oneOf(Object.values(STATE)),
   taxedTotal: PropTypes.number,
+  warning: PropTypes.string,
 };
 
 ColumnCard.defaultProps = {
@@ -83,6 +88,7 @@ ColumnCard.defaultProps = {
   manufacter: '-',
   state: STATE.NORMAL,
   taxedTotal: 0,
+  warning: '',
 };
 
 export default React.memo(ColumnCard);
