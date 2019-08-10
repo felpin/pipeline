@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
+import FlexContainer from '../../components/flex-container';
 import Header from '../../components/header';
 import InProductionColumn from '../../containers/in-production-column';
 import QuoteAcceptedColumn from '../../containers/quote-accepted-column';
@@ -20,12 +21,14 @@ const PipelinePage = () => {
   return (
     <>
       <Header />
-      <QuotePendingColumn />
-      <QuoteReadyColumn />
-      <QuoteAcceptedColumn />
-      <ReadyForProductionColumn />
-      <InProductionColumn />
-      <ShippedColumn />
+      <FlexContainer>
+        <QuotePendingColumn />
+        <QuoteReadyColumn />
+        <QuoteAcceptedColumn />
+        <ReadyForProductionColumn />
+        <InProductionColumn />
+        <ShippedColumn />
+      </FlexContainer>
     </>
   );
 };
