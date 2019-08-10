@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
+import Header from '../../components/header';
 import InProductionColumn from '../../containers/in-production-column';
 import QuoteAcceptedColumn from '../../containers/quote-accepted-column';
 import QuotePendingColumn from '../../containers/quote-pending-column';
@@ -18,6 +19,7 @@ const PipelinePage = () => {
 
   return (
     <>
+      <Header />
       <QuotePendingColumn />
       <QuoteReadyColumn />
       <QuoteAcceptedColumn />
