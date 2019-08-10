@@ -1,6 +1,7 @@
 {
   "translation": {
     "acceptQuote": "Accept quote",
+    "completeOrder": "Complete order",
     "deal": "{{count}} deal",
     "deal_plural": "{{count}} deals",
     "inProduction": "In production",
@@ -13,6 +14,7 @@
     "readyForProduction": "Available for production",
     "refuseQuote": "Refuse quote",
     "shipItem": "Ship item",
+    "shipped": "Shipped",
     "shippingLate": "Should have shipped {{count}} day ago",
     "shippingLate_plural": "Should have shipped {{count}} days ago",
     "startProduction": "Start production"

@@ -6,6 +6,7 @@ import QuoteAcceptedColumn from '../../containers/quote-accepted-column';
 import QuotePendingColumn from '../../containers/quote-pending-column';
 import QuoteReadyColumn from '../../containers/quote-ready-column';
 import ReadyForProductionColumn from '../../containers/ready-for-production-column';
+import ShippedColumn from '../../containers/shipped-column';
 import { fetch } from '../../store/pipeline';
 
 const PipelinePage = () => {
@@ -22,6 +23,7 @@ const PipelinePage = () => {
       <QuoteAcceptedColumn />
       <ReadyForProductionColumn />
       <InProductionColumn />
+      <ShippedColumn />
     </>
   );
 };
