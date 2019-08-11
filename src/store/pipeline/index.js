@@ -2,7 +2,7 @@ import humps from 'humps';
 import produce from 'immer';
 
 import pipelineService from '../../services/pipeline';
-import { login } from '../user';
+import { loadUser } from '../user';
 import { idSelector } from '../user/selectors';
 
 const CHANGE_STATUS = 'pipeline/pipeline/CHANGE_STATUS';
@@ -36,7 +36,7 @@ export const changeStatus = (id, newStatus) => ({
 });
 
 export const fetch = () => async (dispatch, getState) => {
-  await dispatch(login());
+  await dispatch(loadUser());
 
   const id = idSelector(getState());
   return dispatch({ type: FETCH, payload: pipelineService(id) });
