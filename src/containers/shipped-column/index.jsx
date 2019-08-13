@@ -9,13 +9,14 @@ import ColumnHeader from '../../components/column-header';
 import { COMPLETED, SHIPPED } from '../../contants/pipeline-status';
 import useTaxedTotal from '../../hooks/use-taxed-total';
 import { changeStatus } from '../../store/pipeline';
-import { makePipelineStatusItemsSelector } from '../../store/pipeline/selectors';
+import { isLoadingSelector, makePipelineStatusItemsSelector } from '../../store/pipeline/selectors';
 import ColumnCardWithPaymentStatus from '../column-card-with-payment-status';
 
 const shippedItemsSelector = makePipelineStatusItemsSelector(SHIPPED);
 
 const ShippedColumn = () => {
   const dispatch = useDispatch();
+  const isLoading = useSelector(isLoadingSelector);
   const shippedItems = useSelector(shippedItemsSelector);
   const { taxedTotalEur, taxedTotalGbp } = useTaxedTotal(shippedItems);
   const { t } = useTranslation();
@@ -31,13 +32,14 @@ const ShippedColumn = () => {
     () => (
       <ColumnHeader
         deals={shippedItems.length}
+        isLoading={isLoading}
         key="header"
         taxedTotalEur={taxedTotalEur}
         taxedTotalGbp={taxedTotalGbp}
         title={t('shipped')}
       />
     ),
-    [shippedItems.length, t, taxedTotalEur, taxedTotalGbp]
+    [isLoading, shippedItems.length, t, taxedTotalEur, taxedTotalGbp]
   );
 
   const renderItem = useCallback(

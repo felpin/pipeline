@@ -6,11 +6,12 @@ import Column from '../../components/column';
 import ColumnCard from '../../components/column-card';
 import ColumnHeader from '../../components/column-header';
 import { QUOTE_PENDING } from '../../contants/pipeline-status';
-import { makePipelineStatusItemsSelector } from '../../store/pipeline/selectors';
+import { isLoadingSelector, makePipelineStatusItemsSelector } from '../../store/pipeline/selectors';
 
 const quotePendingItemsSelector = makePipelineStatusItemsSelector(QUOTE_PENDING);
 
 const QuotePendingColumn = () => {
+  const isLoading = useSelector(isLoadingSelector);
   const quotePendingItems = useSelector(quotePendingItemsSelector);
   const { t } = useTranslation();
 
@@ -18,6 +19,7 @@ const QuotePendingColumn = () => {
     () => (
       <ColumnHeader
         deals={quotePendingItems.length}
+        isLoading={isLoading}
         key="header"
         showTotals={false}
         title={t('quotePending')}

@@ -8,12 +8,13 @@ import ColumnHeader from '../../components/column-header';
 import CustomInfo from '../../components/custom-info';
 import { QUOTE_ACCEPTED } from '../../contants/pipeline-status';
 import useTaxedTotal from '../../hooks/use-taxed-total';
-import { makePipelineStatusItemsSelector } from '../../store/pipeline/selectors';
+import { isLoadingSelector, makePipelineStatusItemsSelector } from '../../store/pipeline/selectors';
 import ColumnCardWithPaymentStatus from '../column-card-with-payment-status';
 
 const quoteAcceptedItemsSelector = makePipelineStatusItemsSelector(QUOTE_ACCEPTED);
 
 const QuoteAcceptedColumn = () => {
+  const isLoading = useSelector(isLoadingSelector);
   const quoteAcceptedItems = useSelector(quoteAcceptedItemsSelector);
   const { taxedTotalEur, taxedTotalGbp } = useTaxedTotal(quoteAcceptedItems);
   const { t } = useTranslation();
@@ -22,6 +23,7 @@ const QuoteAcceptedColumn = () => {
     () => (
       <ColumnHeader
         deals={quoteAcceptedItems.length}
+        isLoading={isLoading}
         key="header"
         taxedTotalEur={taxedTotalEur}
         taxedTotalGbp={taxedTotalGbp}

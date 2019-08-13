@@ -11,13 +11,14 @@ import { ReactComponent as DeliveryIcon } from '../../assets/delivery.svg';
 import { IN_PRODUCTION, SHIPPED } from '../../contants/pipeline-status';
 import useTaxedTotal from '../../hooks/use-taxed-total';
 import { changeStatus } from '../../store/pipeline';
-import { makePipelineStatusItemsSelector } from '../../store/pipeline/selectors';
+import { isLoadingSelector, makePipelineStatusItemsSelector } from '../../store/pipeline/selectors';
 import ColumnCardWithPaymentStatus from '../column-card-with-payment-status';
 
 const inProductionItemsSelector = makePipelineStatusItemsSelector(IN_PRODUCTION);
 
 const InProductionColumn = () => {
   const dispatch = useDispatch();
+  const isLoading = useSelector(isLoadingSelector);
   const inProductionItems = useSelector(inProductionItemsSelector);
   const { taxedTotalEur, taxedTotalGbp } = useTaxedTotal(inProductionItems);
   const { t } = useTranslation();
@@ -33,13 +34,14 @@ const InProductionColumn = () => {
     () => (
       <ColumnHeader
         deals={inProductionItems.length}
+        isLoading={isLoading}
         key="header"
         taxedTotalEur={taxedTotalEur}
         taxedTotalGbp={taxedTotalGbp}
         title={t('inProduction')}
       />
     ),
-    [inProductionItems.length, t, taxedTotalEur, taxedTotalGbp]
+    [inProductionItems.length, isLoading, t, taxedTotalEur, taxedTotalGbp]
   );
 
   const renderItem = useCallback(

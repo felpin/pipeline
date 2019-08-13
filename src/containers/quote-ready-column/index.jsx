@@ -13,12 +13,13 @@ import CustomInfo from '../../components/custom-info';
 import { QUOTE_ACCEPTED, QUOTE_READY, QUOTE_REFUSED } from '../../contants/pipeline-status';
 import useTaxedTotal from '../../hooks/use-taxed-total';
 import { changeStatus } from '../../store/pipeline';
-import { makePipelineStatusItemsSelector } from '../../store/pipeline/selectors';
+import { isLoadingSelector, makePipelineStatusItemsSelector } from '../../store/pipeline/selectors';
 
 const quoteReadyItemsSelector = makePipelineStatusItemsSelector(QUOTE_READY);
 
 const QuoteReadyColumn = () => {
   const dispatch = useDispatch();
+  const isLoading = useSelector(isLoadingSelector);
   const quoteReadyItems = useSelector(quoteReadyItemsSelector);
   const { taxedTotalEur, taxedTotalGbp } = useTaxedTotal(quoteReadyItems);
   const { t } = useTranslation();
@@ -45,13 +46,14 @@ const QuoteReadyColumn = () => {
     () => (
       <ColumnHeader
         deals={quoteReadyItems.length}
+        isLoading={isLoading}
         key="header"
         taxedTotalEur={taxedTotalEur}
         taxedTotalGbp={taxedTotalGbp}
         title={t('quoteReady')}
       />
     ),
-    [quoteReadyItems.length, t, taxedTotalEur, taxedTotalGbp]
+    [isLoading, quoteReadyItems.length, t, taxedTotalEur, taxedTotalGbp]
   );
 
   const renderItem = useCallback(

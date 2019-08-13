@@ -10,13 +10,14 @@ import Container from '../../components/container';
 import { IN_PRODUCTION, READY_FOR_PRODUCTION } from '../../contants/pipeline-status';
 import useTaxedTotal from '../../hooks/use-taxed-total';
 import { changeStatus } from '../../store/pipeline';
-import { makePipelineStatusItemsSelector } from '../../store/pipeline/selectors';
+import { isLoadingSelector, makePipelineStatusItemsSelector } from '../../store/pipeline/selectors';
 import ColumnCardWithPaymentStatus from '../column-card-with-payment-status';
 
 const readyForProductionItemsSelector = makePipelineStatusItemsSelector(READY_FOR_PRODUCTION);
 
 const ReadyForProductionColumn = () => {
   const dispatch = useDispatch();
+  const isLoading = useSelector(isLoadingSelector);
   const readyForProductionItems = useSelector(readyForProductionItemsSelector);
   const { taxedTotalEur, taxedTotalGbp } = useTaxedTotal(readyForProductionItems);
   const { t } = useTranslation();
@@ -32,13 +33,14 @@ const ReadyForProductionColumn = () => {
     () => (
       <ColumnHeader
         deals={readyForProductionItems.length}
+        isLoading={isLoading}
         key="header"
         taxedTotalEur={taxedTotalEur}
         taxedTotalGbp={taxedTotalGbp}
         title={t('readyForProduction')}
       />
     ),
-    [readyForProductionItems.length, t, taxedTotalEur, taxedTotalGbp]
+    [isLoading, readyForProductionItems.length, t, taxedTotalEur, taxedTotalGbp]
   );
 
   const renderItem = useCallback(
