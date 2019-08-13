@@ -13,6 +13,7 @@ import { IN_PRODUCTION, SHIPPED } from '../contants/pipeline-status';
 import useTaxedTotal from '../hooks/use-taxed-total';
 import { changeStatus } from '../store/pipeline';
 import { makePipelineStatusItemsSelector } from '../store/pipeline/selectors';
+import getPaymentStatus from '../utils/get-payment-status';
 
 const inProductionItemsSelector = makePipelineStatusItemsSelector(IN_PRODUCTION);
 
@@ -42,11 +43,6 @@ const InProductionColumn = () => {
     [inProductionItems.length, t, taxedTotalEur, taxedTotalGbp]
   );
 
-  const getPipelineItemState = useCallback(
-    item => (item.shippingPickupAt ? 'success' : 'normal'),
-    []
-  );
-
   const renderItem = useCallback(
     item => {
       const {
@@ -58,7 +54,7 @@ const InProductionColumn = () => {
         productionReadyAt,
         taxedTotal,
       } = item;
-      const state = getPipelineItemState(item);
+      const paymentState = getPaymentStatus(item);
 
       return (
         <ColumnCard
@@ -80,7 +76,7 @@ const InProductionColumn = () => {
           }
           id={id}
           manufacturer={manufacturer}
-          state={state}
+          state={paymentState}
           taxedTotal={taxedTotal}
           warning={
             daysSinceProductionReadyAt
@@ -90,7 +86,7 @@ const InProductionColumn = () => {
         />
       );
     },
-    [createOnClickAction, getPipelineItemState, t]
+    [createOnClickAction, t]
   );
 
   return <Column header={header} items={inProductionItems} renderItem={renderItem} />;

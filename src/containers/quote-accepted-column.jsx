@@ -10,6 +10,7 @@ import CustomInfo from '../components/custom-info';
 import { QUOTE_ACCEPTED } from '../contants/pipeline-status';
 import useTaxedTotal from '../hooks/use-taxed-total';
 import { makePipelineStatusItemsSelector } from '../store/pipeline/selectors';
+import getPaymentStatus from '../utils/get-payment-status';
 
 const quoteAcceptedItemsSelector = makePipelineStatusItemsSelector(QUOTE_ACCEPTED);
 
@@ -31,19 +32,10 @@ const QuoteAcceptedColumn = () => {
     [quoteAcceptedItems.length, t, taxedTotalEur, taxedTotalGbp]
   );
 
-  const getPipelineItemState = useCallback(item => {
-    const { daysOverdue, paidAmount, taxedTotal } = item;
-    return (
-      (daysOverdue && paidAmount < taxedTotal && 'error') ||
-      (paidAmount >= taxedTotal && 'success') ||
-      'normal'
-    );
-  }, []);
-
   const renderItem = useCallback(
     item => {
       const { client, currency, daysOverdue, id, invoiceDue, taxedTotal } = item;
-      const state = getPipelineItemState(item);
+      const paymentState = getPaymentStatus(item);
 
       return (
         <ColumnCard
@@ -51,17 +43,17 @@ const QuoteAcceptedColumn = () => {
           currency={currency}
           customInfo={invoiceDue ? <CustomInfo date={invoiceDue} Icon={EuroIcon} /> : undefined}
           id={id}
-          state={state}
+          state={paymentState}
           taxedTotal={taxedTotal}
           warning={
-            daysOverdue && state === 'error'
+            daysOverdue && paymentState === 'error'
               ? t('paymentOverdue', { count: daysOverdue })
               : undefined
           }
         />
       );
     },
-    [getPipelineItemState, t]
+    [t]
   );
 
   return <Column header={header} items={quoteAcceptedItems} renderItem={renderItem} />;

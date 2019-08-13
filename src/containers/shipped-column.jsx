@@ -11,6 +11,7 @@ import { COMPLETED, SHIPPED } from '../contants/pipeline-status';
 import useTaxedTotal from '../hooks/use-taxed-total';
 import { changeStatus } from '../store/pipeline';
 import { makePipelineStatusItemsSelector } from '../store/pipeline/selectors';
+import getPaymentStatus from '../utils/get-payment-status';
 
 const shippedItemsSelector = makePipelineStatusItemsSelector(SHIPPED);
 
@@ -41,22 +42,26 @@ const ShippedColumn = () => {
   );
 
   const renderItem = useCallback(
-    item => (
-      <ColumnCard
-        action={
-          // There is a conflict between eslint rules, so one is disabled
-          // eslint-disable-next-line react/jsx-wrap-multilines
-          <IconButton ariaLabel={t('completeOrder')} onClick={createOnClickAction(item)}>
-            <CompleteButtonIcon />
-          </IconButton>
-        }
-        client={item.client}
-        currency={item.currency}
-        id={item.id}
-        manufacturer={item.manufacturer}
-        taxedTotal={item.taxedTotal}
-      />
-    ),
+    item => {
+      const paymentState = getPaymentStatus(item);
+      return (
+        <ColumnCard
+          action={
+            // There is a conflict between eslint rules, so one is disabled
+            // eslint-disable-next-line react/jsx-wrap-multilines
+            <IconButton ariaLabel={t('completeOrder')} onClick={createOnClickAction(item)}>
+              <CompleteButtonIcon />
+            </IconButton>
+          }
+          client={item.client}
+          currency={item.currency}
+          id={item.id}
+          manufacturer={item.manufacturer}
+          state={paymentState}
+          taxedTotal={item.taxedTotal}
+        />
+      );
+    },
     [createOnClickAction, t]
   );
 
