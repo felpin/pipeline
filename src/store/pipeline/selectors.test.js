@@ -1,9 +1,19 @@
-import { pipelineSelector, makePipelineStatusItemsSelector } from './selectors';
+import { isLoadingSelector, pipelineSelector, makePipelineStatusItemsSelector } from './selectors';
 
 describe('pipeline selector', () => {
   test('should return the pipeline state', () => {
     const state = { pipeline: { data: [] } };
     expect(pipelineSelector(state)).toBe(state.pipeline.data);
+  });
+});
+
+describe('isLoading selector', () => {
+  test('should return the loading state', () => {
+    const state = { pipeline: { isLoading: true } };
+    expect(isLoadingSelector(state)).toBe(true);
+
+    const otherState = { pipeline: { isLoading: false } };
+    expect(isLoadingSelector(otherState)).toBe(false);
   });
 });
 
