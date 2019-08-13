@@ -57,7 +57,7 @@ const ColumnCard = ({
       <BottomRightContainer row={actionRow}>{action}</BottomRightContainer>
       {warning.map((warningMessage, index) => (
         <Warning key={warningMessage} row={warningRow + index}>
-          {warning}
+          {warningMessage}
         </Warning>
       ))}
     </Container>

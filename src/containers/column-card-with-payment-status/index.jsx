@@ -27,7 +27,7 @@ const ColumnCardWithPaymentStatus = props => {
     return warnings;
   }, [daysOverdue, status, t, warning]);
 
-  return <ColumnCard {...props} state={status} warning={[warningWithPayment]} />;
+  return <ColumnCard {...props} state={status} warning={warningWithPayment} />;
 };
 
 ColumnCardWithPaymentStatus.propTypes = {
