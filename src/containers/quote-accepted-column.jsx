@@ -4,13 +4,13 @@ import { useSelector } from 'react-redux';
 
 import { ReactComponent as EuroIcon } from '../assets/euro.svg';
 import Column from '../components/column';
-import ColumnCard from '../components/column-card';
 import ColumnHeader from '../components/column-header';
 import CustomInfo from '../components/custom-info';
 import { QUOTE_ACCEPTED } from '../contants/pipeline-status';
 import useTaxedTotal from '../hooks/use-taxed-total';
 import { makePipelineStatusItemsSelector } from '../store/pipeline/selectors';
-import getPaymentStatus from '../utils/get-payment-status';
+
+import ColumnCardWithPaymentStatus from './column-card-with-payment-status';
 
 const quoteAcceptedItemsSelector = makePipelineStatusItemsSelector(QUOTE_ACCEPTED);
 
@@ -32,29 +32,20 @@ const QuoteAcceptedColumn = () => {
     [quoteAcceptedItems.length, t, taxedTotalEur, taxedTotalGbp]
   );
 
-  const renderItem = useCallback(
-    item => {
-      const { client, currency, daysOverdue, id, invoiceDue, taxedTotal } = item;
-      const paymentState = getPaymentStatus(item);
-
-      return (
-        <ColumnCard
-          client={client}
-          currency={currency}
-          customInfo={invoiceDue ? <CustomInfo date={invoiceDue} Icon={EuroIcon} /> : undefined}
-          id={id}
-          state={paymentState}
-          taxedTotal={taxedTotal}
-          warning={
-            daysOverdue && paymentState === 'error'
-              ? t('paymentOverdue', { count: daysOverdue })
-              : undefined
-          }
-        />
-      );
-    },
-    [t]
-  );
+  const renderItem = useCallback(item => {
+    const { client, currency, daysOverdue, id, invoiceDue, paidAmount, taxedTotal } = item;
+    return (
+      <ColumnCardWithPaymentStatus
+        client={client}
+        currency={currency}
+        customInfo={invoiceDue ? <CustomInfo date={invoiceDue} Icon={EuroIcon} /> : undefined}
+        daysOverdue={daysOverdue}
+        id={id}
+        paidAmount={paidAmount}
+        taxedTotal={taxedTotal}
+      />
+    );
+  }, []);
 
   return <Column header={header} items={quoteAcceptedItems} renderItem={renderItem} />;
 };

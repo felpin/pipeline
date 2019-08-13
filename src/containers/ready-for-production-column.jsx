@@ -5,14 +5,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ReactComponent as ArrowForwardButtonIcon } from '../assets/arrow-forward-button.svg';
 import IconButton from '../components/icon-button';
 import Column from '../components/column';
-import ColumnCard from '../components/column-card';
 import ColumnHeader from '../components/column-header';
 import Container from '../components/container';
 import { IN_PRODUCTION, READY_FOR_PRODUCTION } from '../contants/pipeline-status';
 import useTaxedTotal from '../hooks/use-taxed-total';
 import { changeStatus } from '../store/pipeline';
 import { makePipelineStatusItemsSelector } from '../store/pipeline/selectors';
-import getPaymentStatus from '../utils/get-payment-status';
+
+import ColumnCardWithPaymentStatus from './column-card-with-payment-status';
 
 const readyForProductionItemsSelector = makePipelineStatusItemsSelector(READY_FOR_PRODUCTION);
 
@@ -43,28 +43,26 @@ const ReadyForProductionColumn = () => {
   );
 
   const renderItem = useCallback(
-    item => {
-      const paymentState = getPaymentStatus(item);
-      return (
-        <ColumnCard
-          action={
-            // There is a conflict between eslint rules, so one is disabled
-            // eslint-disable-next-line react/jsx-wrap-multilines
-            <IconButton ariaLabel={t('startProduction')} onClick={createOnClickAction(item)}>
-              <ArrowForwardButtonIcon />
-            </IconButton>
-          }
-          available={item.available}
-          client={item.client}
-          currency={item.currency}
-          customInfo={<Container fontWeight="bold">{`${item.hoursSinceUpdated}h`}</Container>}
-          declined={item.declined}
-          id={item.id}
-          state={paymentState}
-          taxedTotal={item.taxedTotal}
-        />
-      );
-    },
+    item => (
+      <ColumnCardWithPaymentStatus
+        action={
+          // There is a conflict between eslint rules, so one is disabled
+          // eslint-disable-next-line react/jsx-wrap-multilines
+          <IconButton ariaLabel={t('startProduction')} onClick={createOnClickAction(item)}>
+            <ArrowForwardButtonIcon />
+          </IconButton>
+        }
+        available={item.available}
+        client={item.client}
+        currency={item.currency}
+        customInfo={<Container fontWeight="bold">{`${item.hoursSinceUpdated}h`}</Container>}
+        daysOverdue={item.daysOverdue}
+        declined={item.declined}
+        paidAmount={item.paidAmount}
+        id={item.id}
+        taxedTotal={item.taxedTotal}
+      />
+    ),
     [createOnClickAction, t]
   );
 

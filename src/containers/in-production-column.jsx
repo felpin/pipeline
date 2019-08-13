@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ReactComponent as ArrowForwardButtonIcon } from '../assets/arrow-forward-button.svg';
 import IconButton from '../components/icon-button';
 import Column from '../components/column';
-import ColumnCard from '../components/column-card';
 import ColumnHeader from '../components/column-header';
 import CustomInfo from '../components/custom-info';
 import { ReactComponent as DeliveryIcon } from '../assets/delivery.svg';
@@ -13,7 +12,8 @@ import { IN_PRODUCTION, SHIPPED } from '../contants/pipeline-status';
 import useTaxedTotal from '../hooks/use-taxed-total';
 import { changeStatus } from '../store/pipeline';
 import { makePipelineStatusItemsSelector } from '../store/pipeline/selectors';
-import getPaymentStatus from '../utils/get-payment-status';
+
+import ColumnCardWithPaymentStatus from './column-card-with-payment-status';
 
 const inProductionItemsSelector = makePipelineStatusItemsSelector(IN_PRODUCTION);
 
@@ -48,16 +48,16 @@ const InProductionColumn = () => {
       const {
         client,
         currency,
+        daysOverdue,
         daysSinceProductionReadyAt,
         id,
         manufacturer,
+        paidAmount,
         productionReadyAt,
         taxedTotal,
       } = item;
-      const paymentState = getPaymentStatus(item);
-
       return (
-        <ColumnCard
+        <ColumnCardWithPaymentStatus
           action={
             // There is a conflict between eslint rules, so one is disabled
             // eslint-disable-next-line react/jsx-wrap-multilines
@@ -74,13 +74,14 @@ const InProductionColumn = () => {
               undefined
             )
           }
+          daysOverdue={daysOverdue}
           id={id}
           manufacturer={manufacturer}
-          state={paymentState}
+          paidAmount={paidAmount}
           taxedTotal={taxedTotal}
           warning={
             daysSinceProductionReadyAt
-              ? t('shippingLate', { count: daysSinceProductionReadyAt })
+              ? [t('shippingLate', { count: daysSinceProductionReadyAt })]
               : undefined
           }
         />

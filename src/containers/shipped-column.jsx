@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ReactComponent as CompleteButtonIcon } from '../assets/complete-button.svg';
 import IconButton from '../components/icon-button';
 import Column from '../components/column';
-import ColumnCard from '../components/column-card';
 import ColumnHeader from '../components/column-header';
 import { COMPLETED, SHIPPED } from '../contants/pipeline-status';
 import useTaxedTotal from '../hooks/use-taxed-total';
 import { changeStatus } from '../store/pipeline';
 import { makePipelineStatusItemsSelector } from '../store/pipeline/selectors';
-import getPaymentStatus from '../utils/get-payment-status';
+
+import ColumnCardWithPaymentStatus from './column-card-with-payment-status';
 
 const shippedItemsSelector = makePipelineStatusItemsSelector(SHIPPED);
 
@@ -42,26 +42,24 @@ const ShippedColumn = () => {
   );
 
   const renderItem = useCallback(
-    item => {
-      const paymentState = getPaymentStatus(item);
-      return (
-        <ColumnCard
-          action={
-            // There is a conflict between eslint rules, so one is disabled
-            // eslint-disable-next-line react/jsx-wrap-multilines
-            <IconButton ariaLabel={t('completeOrder')} onClick={createOnClickAction(item)}>
-              <CompleteButtonIcon />
-            </IconButton>
-          }
-          client={item.client}
-          currency={item.currency}
-          id={item.id}
-          manufacturer={item.manufacturer}
-          state={paymentState}
-          taxedTotal={item.taxedTotal}
-        />
-      );
-    },
+    item => (
+      <ColumnCardWithPaymentStatus
+        action={
+          // There is a conflict between eslint rules, so one is disabled
+          // eslint-disable-next-line react/jsx-wrap-multilines
+          <IconButton ariaLabel={t('completeOrder')} onClick={createOnClickAction(item)}>
+            <CompleteButtonIcon />
+          </IconButton>
+        }
+        client={item.client}
+        currency={item.currency}
+        daysOverdue={item.daysOverdue}
+        id={item.id}
+        manufacturer={item.manufacturer}
+        paidAmount={item.paidAmount}
+        taxedTotal={item.taxedTotal}
+      />
+    ),
     [createOnClickAction, t]
   );
 
