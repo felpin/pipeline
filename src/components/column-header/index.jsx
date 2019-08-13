@@ -7,18 +7,23 @@ import CardContainer from './card-container';
 import Circle from './circle';
 import CircleContainer from './circle-container';
 import Container from './container';
+import Loading from './loading';
 import Total from './total';
 import TotalContainer from './total-container';
 import Title from './title';
+import TitleContainer from './title-container';
 
-const ColumnHeader = ({ deals, showTotals, taxedTotalEur, taxedTotalGbp, title }) => {
+const ColumnHeader = ({ deals, isLoading, showTotals, taxedTotalEur, taxedTotalGbp, title }) => {
   const { t } = useTranslation();
 
   return (
     <Container>
       <CardContainer>
         <Card>
-          <Title>{title}</Title>
+          <TitleContainer>
+            <Title>{title}</Title>
+            {isLoading && <Loading />}
+          </TitleContainer>
           <TotalContainer showTotals={showTotals}>
             <Total>{t('deal', { count: deals })}</Total>
             {showTotals && <Total justifySelf="center">{`${taxedTotalEur}€`}</Total>}
@@ -35,6 +40,7 @@ const ColumnHeader = ({ deals, showTotals, taxedTotalEur, taxedTotalGbp, title }
 
 ColumnHeader.propTypes = {
   deals: PropTypes.number,
+  isLoading: PropTypes.bool,
   showTotals: PropTypes.bool,
   taxedTotalEur: PropTypes.number,
   taxedTotalGbp: PropTypes.number,
@@ -43,6 +49,7 @@ ColumnHeader.propTypes = {
 
 ColumnHeader.defaultProps = {
   deals: 0,
+  isLoading: false,
   showTotals: true,
   taxedTotalEur: 0,
   taxedTotalGbp: 0,
