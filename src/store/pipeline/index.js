@@ -8,20 +8,38 @@ import { idSelector } from '../user/selectors';
 const CHANGE_STATUS = 'pipeline/pipeline/CHANGE_STATUS';
 const FETCH = 'pipeline/pipeline/FETCH';
 
-export default (state = [], action) =>
+export default (state = { isLoading: false, data: [] }, action) =>
   produce(state, draft => {
     switch (action.type) {
       case CHANGE_STATUS: {
         const { id, newStatus } = action.payload;
-        const itemToChange = draft.find(item => item.id === id);
+        const itemToChange = draft.data.find(item => item.id === id);
         itemToChange.status = newStatus;
         break;
       }
 
+      case `${FETCH}_PENDING`: {
+        // Immer requires to change draft
+        // eslint-disable-next-line no-param-reassign
+        draft.isLoading = true;
+        break;
+      }
+
       case `${FETCH}_FULFILLED`: {
+        // Immer requires to change draft
+        // eslint-disable-next-line no-param-reassign
+        draft.isLoading = false;
+
         action.payload.data.forEach(item => {
-          draft.push(humps.camelizeKeys(item));
+          draft.data.push(humps.camelizeKeys(item));
         });
+        break;
+      }
+
+      case `${FETCH}_REJECTED`: {
+        // Immer requires to change draft
+        // eslint-disable-next-line no-param-reassign
+        draft.isLoading = false;
         break;
       }
 

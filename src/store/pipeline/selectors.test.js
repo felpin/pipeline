@@ -2,8 +2,8 @@ import { pipelineSelector, makePipelineStatusItemsSelector } from './selectors';
 
 describe('pipeline selector', () => {
   test('should return the pipeline state', () => {
-    const state = { pipeline: [] };
-    expect(pipelineSelector(state)).toBe(state.pipeline);
+    const state = { pipeline: { data: [] } };
+    expect(pipelineSelector(state)).toBe(state.pipeline.data);
   });
 });
 
@@ -14,11 +14,13 @@ describe('make pipeline status item selector', () => {
 
   test('should get items from the pipeline with correct status', () => {
     const state = {
-      pipeline: [
-        { id: 1, status: 'STATUS_A' },
-        { id: 2, status: 'STATUS_A' },
-        { id: 3, status: 'STATUS_B' },
-      ],
+      pipeline: {
+        data: [
+          { id: 1, status: 'STATUS_A' },
+          { id: 2, status: 'STATUS_A' },
+          { id: 3, status: 'STATUS_B' },
+        ],
+      },
     };
 
     const selector = makePipelineStatusItemsSelector('STATUS_B');

@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-export const pipelineSelector = state => state.pipeline;
+export const pipelineSelector = state => state.pipeline.data;
 
 export const makePipelineStatusItemsSelector = status => {
   return createSelector(

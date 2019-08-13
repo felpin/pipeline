@@ -5,7 +5,9 @@ import reducer, { changeStatus, fetch } from './index';
 
 const CHANGE_STATUS = 'pipeline/pipeline/CHANGE_STATUS';
 const FETCH = 'pipeline/pipeline/FETCH';
+const FETCH_PENDING = 'pipeline/pipeline/FETCH_PENDING';
 const FETCH_FULFILLED = 'pipeline/pipeline/FETCH_FULFILLED';
+const FETCH_REJECTED = 'pipeline/pipeline/FETCH_REJECTED';
 
 jest.mock('../user', () => ({
   __esModule: true,
@@ -18,7 +20,9 @@ jest.mock('../../services/axios-instance', () => ({
 }));
 
 describe(CHANGE_STATUS, () => {
-  const previousState = [{ id: 3, status: 'OLD' }, { id: 4, status: 'OLD' }];
+  const previousState = {
+    data: [{ id: 3, status: 'OLD' }, { id: 4, status: 'OLD' }],
+  };
   const state = reducer(previousState, {
     type: CHANGE_STATUS,
     payload: { id: 4, newStatus: 'NEW' },
@@ -29,16 +33,29 @@ describe(CHANGE_STATUS, () => {
   });
 
   test('should change the status of the item with same id', () => {
-    expect(state.find(item => item.id === 4).status).toBe('NEW');
+    expect(state.data.find(item => item.id === 4).status).toBe('NEW');
   });
 
   test('should not change the status of other items', () => {
-    expect(state.find(item => item.id === 3).status).toBe('OLD');
+    expect(state.data.find(item => item.id === 3).status).toBe('OLD');
+  });
+});
+
+describe(FETCH_PENDING, () => {
+  const previousState = { isLoading: false, data: [] };
+  const state = reducer(previousState, { type: FETCH_PENDING });
+
+  test('should change state', () => {
+    expect(state).not.toBe(previousState);
+  });
+
+  test('should start loading', () => {
+    expect(state.isLoading).toBe(true);
   });
 });
 
 describe(FETCH_FULFILLED, () => {
-  const previousState = [];
+  const previousState = { isLoading: true, data: [] };
   const state = reducer(previousState, {
     type: FETCH_FULFILLED,
     payload: { data: [{ id: 1, status: 'STATUS' }] },
@@ -48,9 +65,26 @@ describe(FETCH_FULFILLED, () => {
     expect(state).not.toBe(previousState);
   });
 
+  test('should stop loading', () => {
+    expect(state.isLoading).toBe(false);
+  });
+
   test('should add items on payload to state', () => {
-    expect(state.length).toBe(1);
-    expect(state[0]).toEqual({ id: 1, status: 'STATUS' });
+    expect(state.data.length).toBe(1);
+    expect(state.data[0]).toEqual({ id: 1, status: 'STATUS' });
+  });
+});
+
+describe(FETCH_REJECTED, () => {
+  const previousState = { isLoading: true, data: [] };
+  const state = reducer(previousState, { type: FETCH_REJECTED });
+
+  test('should change state', () => {
+    expect(state).not.toBe(previousState);
+  });
+
+  test('should stop loading', () => {
+    expect(state.isLoading).toBe(false);
   });
 });
 
