@@ -55,7 +55,11 @@ const ColumnCard = ({
         </Declined>
       ))}
       <BottomRightContainer row={actionRow}>{action}</BottomRightContainer>
-      {warning && <Warning row={warningRow}>{warning}</Warning>}
+      {warning.map((warningMessage, index) => (
+        <Warning key={warningMessage} row={warningRow + index}>
+          {warning}
+        </Warning>
+      ))}
     </Container>
   );
 };
@@ -76,7 +80,7 @@ ColumnCard.propTypes = {
   manufacturer: manufacturerPropType,
   state: PropTypes.oneOf(Object.values(STATE)),
   taxedTotal: PropTypes.number,
-  warning: PropTypes.string,
+  warning: PropTypes.arrayOf(PropTypes.string),
 };
 
 ColumnCard.defaultProps = {
@@ -88,7 +92,7 @@ ColumnCard.defaultProps = {
   manufacturer: null,
   state: STATE.NORMAL,
   taxedTotal: 0,
-  warning: '',
+  warning: [],
 };
 
 export default React.memo(ColumnCard);
