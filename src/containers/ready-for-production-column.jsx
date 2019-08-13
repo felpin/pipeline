@@ -54,7 +54,7 @@ const ReadyForProductionColumn = () => {
         available={item.available}
         client={item.client}
         currency={item.currency}
-        customInfo={<Container fontWeight="bold">0h</Container>}
+        customInfo={<Container fontWeight="bold">{`${item.hoursSinceUpdated}h`}</Container>}
         declined={item.declined}
         id={item.id}
         taxedTotal={item.taxedTotal}
