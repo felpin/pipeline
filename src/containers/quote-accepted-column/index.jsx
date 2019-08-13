@@ -30,7 +30,7 @@ const QuoteAcceptedColumn = () => {
         title={t('quoteAccepted')}
       />
     ),
-    [quoteAcceptedItems.length, t, taxedTotalEur, taxedTotalGbp]
+    [isLoading, quoteAcceptedItems.length, t, taxedTotalEur, taxedTotalGbp]
   );
 
   const renderItem = useCallback(item => {

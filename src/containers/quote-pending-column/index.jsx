@@ -25,7 +25,7 @@ const QuotePendingColumn = () => {
         title={t('quotePending')}
       />
     ),
-    [quotePendingItems.length, t]
+    [isLoading, quotePendingItems.length, t]
   );
 
   const renderItem = useCallback(item => <ColumnCard client={item.client} id={item.id} />, []);
