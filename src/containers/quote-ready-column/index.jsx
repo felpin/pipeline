@@ -2,18 +2,18 @@ import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ReactComponent as AcceptIcon } from '../assets/accept-button.svg';
-import { ReactComponent as InvoiceIcon } from '../assets/invoice.svg';
-import { ReactComponent as RefuseIcon } from '../assets/refuse-button.svg';
-import IconButtonSet from '../components/icon-button-set';
-import Column from '../components/column';
-import ColumnCard from '../components/column-card';
-import ColumnHeader from '../components/column-header';
-import CustomInfo from '../components/custom-info';
-import { QUOTE_ACCEPTED, QUOTE_READY, QUOTE_REFUSED } from '../contants/pipeline-status';
-import useTaxedTotal from '../hooks/use-taxed-total';
-import { changeStatus } from '../store/pipeline';
-import { makePipelineStatusItemsSelector } from '../store/pipeline/selectors';
+import { ReactComponent as AcceptIcon } from '../../assets/accept-button.svg';
+import { ReactComponent as InvoiceIcon } from '../../assets/invoice.svg';
+import { ReactComponent as RefuseIcon } from '../../assets/refuse-button.svg';
+import IconButtonSet from '../../components/icon-button-set';
+import Column from '../../components/column';
+import ColumnCard from '../../components/column-card';
+import ColumnHeader from '../../components/column-header';
+import CustomInfo from '../../components/custom-info';
+import { QUOTE_ACCEPTED, QUOTE_READY, QUOTE_REFUSED } from '../../contants/pipeline-status';
+import useTaxedTotal from '../../hooks/use-taxed-total';
+import { changeStatus } from '../../store/pipeline';
+import { makePipelineStatusItemsSelector } from '../../store/pipeline/selectors';
 
 const quoteReadyItemsSelector = makePipelineStatusItemsSelector(QUOTE_READY);
 

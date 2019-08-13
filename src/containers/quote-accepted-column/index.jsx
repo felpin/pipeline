@@ -2,15 +2,14 @@ import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
-import { ReactComponent as EuroIcon } from '../assets/euro.svg';
-import Column from '../components/column';
-import ColumnHeader from '../components/column-header';
-import CustomInfo from '../components/custom-info';
-import { QUOTE_ACCEPTED } from '../contants/pipeline-status';
-import useTaxedTotal from '../hooks/use-taxed-total';
-import { makePipelineStatusItemsSelector } from '../store/pipeline/selectors';
-
-import ColumnCardWithPaymentStatus from './column-card-with-payment-status';
+import { ReactComponent as EuroIcon } from '../../assets/euro.svg';
+import Column from '../../components/column';
+import ColumnHeader from '../../components/column-header';
+import CustomInfo from '../../components/custom-info';
+import { QUOTE_ACCEPTED } from '../../contants/pipeline-status';
+import useTaxedTotal from '../../hooks/use-taxed-total';
+import { makePipelineStatusItemsSelector } from '../../store/pipeline/selectors';
+import ColumnCardWithPaymentStatus from '../column-card-with-payment-status';
 
 const quoteAcceptedItemsSelector = makePipelineStatusItemsSelector(QUOTE_ACCEPTED);
 

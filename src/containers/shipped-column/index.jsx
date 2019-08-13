@@ -2,16 +2,15 @@ import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ReactComponent as CompleteButtonIcon } from '../assets/complete-button.svg';
-import IconButton from '../components/icon-button';
-import Column from '../components/column';
-import ColumnHeader from '../components/column-header';
-import { COMPLETED, SHIPPED } from '../contants/pipeline-status';
-import useTaxedTotal from '../hooks/use-taxed-total';
-import { changeStatus } from '../store/pipeline';
-import { makePipelineStatusItemsSelector } from '../store/pipeline/selectors';
-
-import ColumnCardWithPaymentStatus from './column-card-with-payment-status';
+import { ReactComponent as CompleteButtonIcon } from '../../assets/complete-button.svg';
+import IconButton from '../../components/icon-button';
+import Column from '../../components/column';
+import ColumnHeader from '../../components/column-header';
+import { COMPLETED, SHIPPED } from '../../contants/pipeline-status';
+import useTaxedTotal from '../../hooks/use-taxed-total';
+import { changeStatus } from '../../store/pipeline';
+import { makePipelineStatusItemsSelector } from '../../store/pipeline/selectors';
+import ColumnCardWithPaymentStatus from '../column-card-with-payment-status';
 
 const shippedItemsSelector = makePipelineStatusItemsSelector(SHIPPED);
 

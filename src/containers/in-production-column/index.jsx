@@ -2,18 +2,17 @@ import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ReactComponent as ArrowForwardButtonIcon } from '../assets/arrow-forward-button.svg';
-import IconButton from '../components/icon-button';
-import Column from '../components/column';
-import ColumnHeader from '../components/column-header';
-import CustomInfo from '../components/custom-info';
-import { ReactComponent as DeliveryIcon } from '../assets/delivery.svg';
-import { IN_PRODUCTION, SHIPPED } from '../contants/pipeline-status';
-import useTaxedTotal from '../hooks/use-taxed-total';
-import { changeStatus } from '../store/pipeline';
-import { makePipelineStatusItemsSelector } from '../store/pipeline/selectors';
-
-import ColumnCardWithPaymentStatus from './column-card-with-payment-status';
+import { ReactComponent as ArrowForwardButtonIcon } from '../../assets/arrow-forward-button.svg';
+import IconButton from '../../components/icon-button';
+import Column from '../../components/column';
+import ColumnHeader from '../../components/column-header';
+import CustomInfo from '../../components/custom-info';
+import { ReactComponent as DeliveryIcon } from '../../assets/delivery.svg';
+import { IN_PRODUCTION, SHIPPED } from '../../contants/pipeline-status';
+import useTaxedTotal from '../../hooks/use-taxed-total';
+import { changeStatus } from '../../store/pipeline';
+import { makePipelineStatusItemsSelector } from '../../store/pipeline/selectors';
+import ColumnCardWithPaymentStatus from '../column-card-with-payment-status';
 
 const inProductionItemsSelector = makePipelineStatusItemsSelector(IN_PRODUCTION);
 

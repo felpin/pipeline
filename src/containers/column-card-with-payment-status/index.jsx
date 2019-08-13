@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import ColumnCard from '../components/column-card';
+import ColumnCard from '../../components/column-card';
 
 const ColumnCardWithPaymentStatus = props => {
   const { t } = useTranslation();
