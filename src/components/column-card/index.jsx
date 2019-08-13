@@ -23,6 +23,7 @@ const ColumnCard = ({
   client,
   currency,
   customInfo,
+  customInfoState,
   declined,
   id,
   manufacturer,
@@ -40,7 +41,7 @@ const ColumnCard = ({
       <Manufacturer>{manufacturer ? manufacturer.name : '-'}</Manufacturer>
       <Client>{client}</Client>
       {!!currency && <Value>{`${taxedTotal} ${currency}`}</Value>}
-      <TopRightContainer state={state}>
+      <TopRightContainer state={customInfoState}>
         {customInfo}
         <VerticalEllipsis>⋮</VerticalEllipsis>
       </TopRightContainer>
@@ -75,6 +76,7 @@ ColumnCard.propTypes = {
   client: PropTypes.string.isRequired,
   currency: PropTypes.string,
   customInfo: PropTypes.node,
+  customInfoState: PropTypes.oneOf(Object.values(STATE)),
   declined: PropTypes.arrayOf(manufacturerPropType),
   id: PropTypes.number.isRequired,
   manufacturer: manufacturerPropType,
@@ -88,6 +90,7 @@ ColumnCard.defaultProps = {
   available: [],
   currency: '',
   customInfo: null,
+  customInfoState: STATE.NORMAL,
   declined: [],
   manufacturer: null,
   state: STATE.NORMAL,

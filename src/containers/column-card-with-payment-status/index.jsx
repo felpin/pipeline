@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next';
 
 import ColumnCard from '../../components/column-card';
 
-const ColumnCardWithPaymentStatus = props => {
+const ColumnCardWithPaymentStatus = ({ addCustomInfoState, ...restProps }) => {
   const { t } = useTranslation();
 
-  const { daysOverdue, paidAmount, taxedTotal, warning } = props;
+  const { daysOverdue, paidAmount, taxedTotal, warning } = restProps;
 
   const status = useMemo(
     () =>
@@ -27,10 +27,18 @@ const ColumnCardWithPaymentStatus = props => {
     return warnings;
   }, [daysOverdue, status, t, warning]);
 
-  return <ColumnCard {...props} state={status} warning={warningWithPayment} />;
+  return (
+    <ColumnCard
+      customInfoState={addCustomInfoState ? status : undefined}
+      {...restProps}
+      state={status}
+      warning={warningWithPayment}
+    />
+  );
 };
 
 ColumnCardWithPaymentStatus.propTypes = {
+  addCustomInfoState: PropTypes.bool,
   daysOverdue: PropTypes.number,
   paidAmount: PropTypes.number.isRequired,
   taxedTotal: PropTypes.number.isRequired,
@@ -38,6 +46,7 @@ ColumnCardWithPaymentStatus.propTypes = {
 };
 
 ColumnCardWithPaymentStatus.defaultProps = {
+  addCustomInfoState: false,
   daysOverdue: 0,
   warning: [],
 };

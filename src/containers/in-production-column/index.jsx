@@ -73,6 +73,7 @@ const InProductionColumn = () => {
               undefined
             )
           }
+          customInfoState={item.shippingPickupAt ? 'success' : 'normal'}
           daysOverdue={daysOverdue}
           id={id}
           manufacturer={manufacturer}

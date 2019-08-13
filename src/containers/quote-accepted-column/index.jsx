@@ -35,6 +35,7 @@ const QuoteAcceptedColumn = () => {
     const { client, currency, daysOverdue, id, invoiceDue, paidAmount, taxedTotal } = item;
     return (
       <ColumnCardWithPaymentStatus
+        addCustomInfoState
         client={client}
         currency={currency}
         customInfo={invoiceDue ? <CustomInfo date={invoiceDue} Icon={EuroIcon} /> : undefined}
